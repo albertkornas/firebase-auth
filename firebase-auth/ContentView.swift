@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
+    @State var loggedIn = false
     @State var email = ""
     @State var password = ""
 
@@ -27,8 +28,10 @@ struct ContentView: View {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
+                loggedIn = false
             } else {
                 print("success")
+                loggedIn = true
             }
         }
     }
